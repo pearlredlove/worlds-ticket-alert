@@ -1,0 +1,12 @@
+{
+  "name": "worlds-ticket-alert",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "monitor": "node src/monitor.js"
+  },
+  "dependencies": {
+    "playwright": "^1.55.0"
+  }
+}

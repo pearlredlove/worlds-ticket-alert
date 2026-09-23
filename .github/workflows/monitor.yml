@@ -1,0 +1,85 @@
+name: Check Worlds ticket prices
+
+on:
+  push:
+    branches: [main]
+  schedule:
+    - cron: "*/5 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  issues: write
+
+concurrency:
+  group: ticket-monitor
+  cancel-in-progress: true
+
+jobs:
+  monitor:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - run: npm install
+
+      - run: npx playwright install --with-deps chromium
+
+      - name: Check ticket listings
+        run: npm run monitor
+
+      - name: Create price-drop alerts
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require("fs");
+            const alerts = JSON.parse(fs.readFileSync("alerts.json", "utf8"));
+            for (const alert of alerts) {
+              const title = `🎟️ Price drop: ${alert.event} - $${alert.newPrice}`;
+              const body = [
+                `## Ticket price dropped`,
+                `- Event: **${alert.event}**`,
+                `- Match: **${alert.rule}**`,
+                `- Site: **${alert.site}**`,
+                `- Previous lowest: **$${alert.oldPrice}**`,
+                `- New lowest: **$${alert.newPrice} per ticket**`,
+                `- Section: **${alert.section}**`,
+                `- Row: **${alert.row}**`,
+                `- Seats: **${alert.seats}**`,
+                `- [Open ticket listing](${alert.url})`,
+                ``,
+                `Listing text: ${alert.details}`
+              ].join("\n");
+              await github.rest.issues.create({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                title,
+                body,
+                assignees: [context.repo.owner]
+              });
+            }
+
+      - name: Save updated price baselines
+        run: |
+          if ! git diff --quiet -- state.json; then
+            git config user.name "ticket-monitor"
+            git config user.email "actions@users.noreply.github.com"
+            git add state.json
+            git commit -m "Update ticket price baselines [skip ci]"
+            git push
+          fi
+
+      - name: Upload diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ticket-monitor-diagnostics
+          path: |
+            diagnostics.txt
+            alerts.json
+          retention-days: 7

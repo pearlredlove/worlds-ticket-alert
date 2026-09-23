@@ -1,0 +1,67 @@
+{
+  "events": [
+    {
+      "id": "2026-10-24-floor-f-row-k",
+      "name": "Worlds 2026 Swiss 2 - Oct 24",
+      "quantity": 1,
+      "rules": [
+        { "label": "Floor F Row K near Seat 3", "section": ["F", "FLOOR F"], "rows": ["K"], "preferredSeats": [1, 2, 3, 4, 5] }
+      ],
+      "urls": [
+        { "site": "Ticketmaster", "url": "https://www.ticketmaster.com/worlds-2026-swiss-2-allen-texas-10-24-2026/event/0C0064F0887349FF" },
+        { "site": "SeatGeek", "url": "https://seatgeek.com/league-of-legends-tickets/esports/2026-10-24-12-pm/18392906" }
+      ]
+    },
+    {
+      "id": "2026-10-25-floor-f-row-h",
+      "name": "Worlds 2026 Swiss 3 - Oct 25",
+      "quantity": 1,
+      "rules": [
+        { "label": "Floor F Row H near Seat 1", "section": ["F", "FLOOR F"], "rows": ["H"], "preferredSeats": [1, 2, 3, 4] }
+      ],
+      "urls": [
+        { "site": "Ticketmaster", "url": "https://www.ticketmaster.com/worlds-2026-swiss-3-allen-texas-10-25-2026/event/0C0064F088784A0A" },
+        { "site": "SeatGeek", "url": "https://seatgeek.com/league-of-legends-tickets/esports/2026-10-25-12-pm/18392911" }
+      ]
+    },
+    {
+      "id": "2026-10-31-any-pair",
+      "name": "Worlds 2026 Swiss 8 - Oct 31",
+      "quantity": 2,
+      "rules": [
+        { "label": "Any two adjacent seats", "anySection": true }
+      ],
+      "urls": [
+        { "site": "Ticketmaster", "url": "https://www.ticketmaster.com/worlds-2026-swiss-8-allen-texas-10-31-2026/event/0C0064F0D699BBB8" },
+        { "site": "SeatGeek", "url": "https://seatgeek.com/league-of-legends-tickets/esports/2026-10-31-12-pm/18392901" }
+      ]
+    },
+    {
+      "id": "2026-11-07-second-level-pair",
+      "name": "Worlds 2026 Semis 1 - Nov 7",
+      "quantity": 2,
+      "rules": [
+        { "label": "Second level, any section", "sectionPattern": "^2\\d\\d$" }
+      ],
+      "urls": [
+        { "site": "Ticketmaster", "url": "https://www.ticketmaster.com/worlds-2026-semis-1-allen-11-07-2026/event/0C0064F088A74A76" },
+        { "site": "SeatGeek", "url": "https://seatgeek.com/league-of-legends-tickets/esports/2026-11-07-12-pm/18392912" }
+      ]
+    },
+    {
+      "id": "2026-11-08-section-107-pair",
+      "name": "Worlds 2026 Semis 2 - Nov 8",
+      "quantity": 2,
+      "rules": [
+        { "label": "Section 107 Row R", "section": ["107"], "rows": ["R"], "priority": 1 },
+        { "label": "Section 107 Row Q or S", "section": ["107"], "rows": ["Q", "S"], "priority": 2 },
+        { "label": "Section 107 Row P or T", "section": ["107"], "rows": ["P", "T"], "priority": 3 },
+        { "label": "Section 107, any row", "section": ["107"], "priority": 4 }
+      ],
+      "urls": [
+        { "site": "Ticketmaster", "url": "https://www.ticketmaster.com/worlds-2026-semis-2-allen-11-08-2026/event/0C0064F088AC4A7F" },
+        { "site": "SeatGeek", "url": "https://seatgeek.com/league-of-legends-tickets/esports/2026-11-08-12-pm/18392905" }
+      ]
+    }
+  ]
+}
